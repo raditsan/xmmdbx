@@ -7,6 +7,8 @@ import {
   DrawerItemList,
   DrawerItem,
 } from '@react-navigation/drawer';
+import { useEffect } from 'react';
+import RNBootSplash from 'react-native-bootsplash';
 
 function Feed({navigation}) {
   return (
@@ -62,6 +64,16 @@ function MyDrawer() {
 }
 
 export default function Navigators() {
+  useEffect(() => {
+    const init = async () => {
+      // …do multiple sync or async tasks
+    };
+
+    init().finally(async () => {
+      await RNBootSplash.hide({fade: true});
+      console.log('Bootsplash has been hidden successfully');
+    });
+  }, []);
   return (
     <NavigationContainer>
       <MyDrawer />
