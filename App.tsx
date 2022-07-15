@@ -27,6 +27,8 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import {View as CView} from 'src/components';
+
 const Section: React.FC<
   PropsWithChildren<{
     title: string;
@@ -35,6 +37,7 @@ const Section: React.FC<
   const isDarkMode = useColorScheme() === 'dark';
   return (
     <View style={styles.sectionContainer}>
+      <CView />
       <Text
         style={[
           styles.sectionTitle,
