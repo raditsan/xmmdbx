@@ -3,7 +3,7 @@ import {useCallback, useEffect, useRef, useState} from 'react';
 import axios, {AxiosResponse} from 'axios';
 import {ApiGetProps} from 'src/apis';
 import {errorMessage, showToast} from './index';
-
+export * from 'src/contexts';
 let fetchData = {};
 const getInitialFetchDataList = (props: any): any[] => {
   // @ts-ignore

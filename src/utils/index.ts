@@ -83,7 +83,7 @@ export function apiGet<T = any, R = AxiosResponse<T>>(
   return axios.get(url, config);
 }
 export const tmdbImage = (urlPath: string) => {
-  return `https://image.tmdb.org/t/p/original${urlPath}`;
+  return `https://image.tmdb.org/t/p/w500${urlPath}`;
 };
 export const screenWidth = () => {
   const {width} = Dimensions.get('window');

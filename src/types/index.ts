@@ -13,12 +13,7 @@ import {
 } from 'react-native';
 import React, {ReactNode} from 'react';
 import {AxiosResponse} from 'axios';
-import {
-  ApiDeleteProps,
-  ApiGetProps,
-  ApiPatchProps,
-  ApiPostProps,
-} from 'src/apis';
+import {ApiGetProps} from 'src/apis';
 
 type Modify<T, R> = Omit<T, keyof R> & R;
 
@@ -140,7 +135,7 @@ export interface FlatListServerSideProps<ItemT> extends FlatListProps<ItemT> {
   name?: string;
   emptyPlaceholderViewProps?: EmptyPlaceholderViewProps;
   fetchOnMount?: boolean;
-  dataRequest?: ApiGetProps | ApiPostProps | ApiDeleteProps | ApiPatchProps;
+  dataRequest?: ApiGetProps;
   onFetching?: (value: boolean) => void;
   forceLocalSide?: boolean;
   uniqueKey: string;
@@ -163,7 +158,7 @@ export interface MovieModel {
   popularity: number;
   poster_path: string;
   profile_path: string;
-  release_date: Date;
+  release_date: string;
   title: string;
   name: string;
   o: string;

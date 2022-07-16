@@ -8,6 +8,7 @@ export * from './FlatListFooterIndicator';
 export * from './FlatListServerSide';
 export * from './EmptyPlaceholderView';
 export * from './Header';
+export * from './ListItem';
 
 export const Colors = {
   color0: '#000000',

@@ -14,5 +14,13 @@ const en = {
   more: 'More',
   empty_title: 'No {{value}}',
   empty_message: 'For now there is no {{value}} for you, Thank you.',
+  add_to_watch_list: 'Add to Watch List',
+  remove_from_watch_list: 'Remove from Watch List',
+  release_date: 'Release Date',
+  watch_list: 'Watch List',
+  language: 'Language',
+  en: 'English',
+  id: 'Indonesia',
+  menu: 'Menu',
 };
 export default en;

@@ -4,7 +4,7 @@ import en from './en';
 import id from './id';
 i18n.use(initReactI18next).init({
   compatibilityJSON: 'v3',
-  lng: 'id',
+  lng: 'en',
   fallbackLng: 'en',
   resources: {
     en: {
