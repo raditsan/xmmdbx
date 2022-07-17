@@ -2,14 +2,16 @@
 
 ## Screenshots
 
-<img src="./screenshots/sc1.png" alt="Splashscreen" width="130"/>
-<img src="./screenshots/sc2.png" alt="Home Movie" width="130"/>
-<img src="./screenshots/sc3.png" alt="Movie Detail" width="130"/>
-<img src="./screenshots/sc4.png" alt="Home Person" width="130"/>
-<img src="./screenshots/sc5.png" alt="Person Detail" width="130"/>
-<img src="./screenshots/sc6.png" alt="Side Menu" width="130"/>
-<img src="./screenshots/sc7.png" alt="More / Side Menu Item Detail" width="130"/>
-<img src="./screenshots/sc8.png" alt="Watch List" width="130"/>
+<div style="display: grid;grid-template-columns: auto auto auto;">
+    <img src="./screenshots/sc1.png" alt="Splashscreen" width="130"/>
+    <img src="./screenshots/sc2.png" alt="Home Movie" width="130"/>
+    <img src="./screenshots/sc3.png" alt="Movie Detail" width="130"/>
+    <img src="./screenshots/sc4.png" alt="Home Person" width="130"/>
+    <img src="./screenshots/sc5.png" alt="Person Detail" width="130"/>
+    <img src="./screenshots/sc6.png" alt="Side Menu" width="130"/>
+    <img src="./screenshots/sc7.png" alt="More / Side Menu Item Detail" width="130"/>
+    <img src="./screenshots/sc8.png" alt="Watch List" width="130"/>
+</div>
 
 
 ## Prerequisites
