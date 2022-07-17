@@ -25,7 +25,7 @@ import {useState} from 'react';
 
 export const Home = ({navigation}) => {
   const [flagRefresh, setFlagRefresh] = useState(randomString());
-  const {onOpenMovieItemModal} = useApp();
+  const {onOpenMovieItemModal, onOpenPersonItemModal} = useApp();
   const {t} = useTranslation();
   const {setIsRefreshing, scrollViewProps} = useScrollView({
     scrollViewProps: {
@@ -234,8 +234,8 @@ export const Home = ({navigation}) => {
         <SegmentCard2
           offlineIdentifier={'popular_person'}
           title={t('popular_person')}
-          onTapItem={() => {
-            // onOpenMovieItemModal(item);
+          onTapItem={item => {
+            onOpenPersonItemModal(item);
           }}
           onTapViewMore={() => {
             navigation.navigate('DetailList', {

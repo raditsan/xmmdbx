@@ -9,14 +9,18 @@ export const ListItem = (props: {
   item: MovieModel;
   heightItem: number;
 }) => {
-  const {onOpenMovieItemModal} = useApp();
+  const {onOpenMovieItemModal, onOpenPersonItemModal} = useApp();
   const {item, heightItem, isPerson} = props;
   return (
     <View flex={1} flexDirection={'column'}>
       <TouchableOpacity
         key={item.id}
         onPress={() => {
-          !isPerson && onOpenMovieItemModal(item);
+          if (isPerson) {
+            onOpenPersonItemModal(item as any);
+          } else {
+            onOpenMovieItemModal(item);
+          }
         }}>
         <View marginRight={10}>
           <View borderRadius={10} overflow={'hidden'}>

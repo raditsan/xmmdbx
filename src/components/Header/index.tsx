@@ -24,7 +24,7 @@ export const Header = (props: HeaderProps) => {
     <>
       <StatusBar
         barStyle={props.barStyle || 'light-content'}
-        backgroundColor={Colors[props.style?.backgroundColor || 'color1']}
+        backgroundColor={Colors[props.style?.backgroundColor || 'color4']}
       />
       <View
         backgroundColor={Colors.color4}

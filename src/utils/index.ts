@@ -7,7 +7,7 @@ import {
 import axios, {AxiosRequestConfig, AxiosResponse} from 'axios';
 import config from '../configs';
 import {Dimensions, RefreshControlProps} from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 export * from './hookFunction';
 export {useSafeAreaInsets, useHeaderHeight, getDefaultHeaderHeight};
 export const colorsFix: any = name => {

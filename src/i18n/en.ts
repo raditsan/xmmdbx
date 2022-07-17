@@ -22,5 +22,8 @@ const en = {
   en: 'English',
   id: 'Indonesia',
   menu: 'Menu',
+  known_for: 'Known For',
+  known_for_department: 'Known For Departement',
+  popularity: 'Popularity',
 };
 export default en;

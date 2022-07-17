@@ -1,7 +1,7 @@
 import * as React from 'react';
-import {MovieModel} from 'src/types';
+import { MovieModel, PersonModel } from "src/types";
 import {useTranslation} from 'react-i18next';
-import {useEffect, useState} from 'react';
+import { useEffect, useMemo, useState } from "react";
 import {limitArrayTo, screenWidth, tmdbImage, useFetch} from 'src/utils';
 import {getPersonPopularApi} from 'src/apis';
 import {Image, Label, View} from 'src/components';
@@ -11,7 +11,7 @@ export const SegmentCard2 = (props: {
   offlineIdentifier?: string;
   title: string;
   flagRefresh: string;
-  onTapItem: (data: MovieModel) => void;
+  onTapItem: (data: PersonModel) => void;
   onTapViewMore?: () => void;
 }) => {
   const {t} = useTranslation();
@@ -24,6 +24,14 @@ export const SegmentCard2 = (props: {
   useEffect(() => {
     api.fetch().then(() => {});
   }, [props.flagRefresh]);
+
+  const list = useMemo(() => {
+    let listHolder = [{id: '1'}, {id: '2'}, {id: '3'}, {id: '4'}];
+    if (api.isLoading) {
+      return listHolder;
+    }
+    return api.list;
+  }, [api.isLoading]);
   return (
     <>
       <View marginHorizontal={24} marginBottom={12}>
@@ -44,7 +52,7 @@ export const SegmentCard2 = (props: {
           setHeightItem(width / 1.8);
         }}
         scrollEnabled={false}
-        data={limitArrayTo(api.list, 4)}
+        data={limitArrayTo(list, 4)}
         contentContainerStyle={{
           paddingLeft: 24,
           paddingRight: 14,
@@ -69,7 +77,7 @@ export const SegmentCard2 = (props: {
                   <View marginVertical={10}>
                     <Label numberOfLines={2}>{item.name}</Label>
                     <Label numberOfLines={2} fontWeight={'400'} size={11}>
-                      {item.known_for
+                      {(item.known_for || [])
                         .map((el: any) => el.title || el.name)
                         .join(', ')}
                     </Label>
