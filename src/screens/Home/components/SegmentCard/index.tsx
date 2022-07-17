@@ -8,6 +8,7 @@ import {TouchableOpacity} from 'react-native';
 
 export const SegmentCard = (props: {
   title: string;
+  offlineIdentifier?: string;
   flagRefresh: string;
   subtitle?: string;
   apiFunction: (data: any) => Promise<any>;
@@ -17,6 +18,7 @@ export const SegmentCard = (props: {
   const {t} = useTranslation();
   const api = useFetch({
     apiFunction: props.apiFunction,
+    offlineIdentifier: props.offlineIdentifier,
   });
 
   useEffect(() => {

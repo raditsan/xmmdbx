@@ -1,13 +1,12 @@
 import * as React from 'react';
-import AsyncStorage from '@react-native-community/async-storage';
 import {createContext, useContext, useEffect, useRef, useState} from 'react';
 import {Dimensions, TouchableOpacity} from 'react-native';
-import {Colors, Image, Label, RNImage, View} from '../../components';
-import {tmdbImage} from '../../utils';
+import {Colors, Image, Label, RNImage, View} from 'src/components';
+import {getStorage, setStorage, tmdbImage} from 'src/utils';
 import {Modalize} from 'react-native-modalize';
 import {useTranslation} from 'react-i18next';
-import {MovieModel} from '../../types';
-import i18n from "src/i18n";
+import {MovieModel} from 'src/types';
+import i18n from 'src/i18n';
 
 const CounterContext = createContext({
   lang: 'en',
@@ -47,13 +46,13 @@ export const AppContextProvider = ({children}) => {
   //SET VALUE
   useEffect(() => {
     if (watchList && isReady) {
-      AsyncStorage.setItem(APP_WATCHLIST_KEY, JSON.stringify(watchList));
+      setStorage(APP_WATCHLIST_KEY, JSON.stringify(watchList));
     }
   }, [watchList, isReady]);
 
   useEffect(() => {
     if (lang && isReady) {
-      AsyncStorage.setItem(APP_LANG_KEY, lang);
+      setStorage(APP_LANG_KEY, lang);
       i18n.changeLanguage(lang);
     }
   }, [lang, isReady]);
@@ -65,13 +64,12 @@ export const AppContextProvider = ({children}) => {
 
   const setInitialData = async () => {
     try {
-      const val_lang = await AsyncStorage.getItem(APP_LANG_KEY);
+      const val_lang = await getStorage(APP_LANG_KEY);
       if (val_lang) {
         setLang(val_lang);
       }
-      const val_watchlist = await AsyncStorage.getItem(APP_WATCHLIST_KEY);
+      const val_watchlist = await getStorage(APP_WATCHLIST_KEY);
       if (val_watchlist) {
-        console.log('value', val_watchlist);
         setWatchList(JSON.parse(val_watchlist || '[]'));
       }
     } catch (e) {

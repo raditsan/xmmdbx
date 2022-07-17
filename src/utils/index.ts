@@ -7,6 +7,7 @@ import {
 import axios, {AxiosRequestConfig, AxiosResponse} from 'axios';
 import config from '../configs';
 import {Dimensions, RefreshControlProps} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 export * from './hookFunction';
 export {useSafeAreaInsets, useHeaderHeight, getDefaultHeaderHeight};
 export const colorsFix: any = name => {
@@ -129,4 +130,30 @@ export function randomString(length: number = 8): string {
     R += randomCharacter(charset);
   }
   return R;
+}
+export function setStorage(key: string, value: string): Promise<any> {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const val = await AsyncStorage.setItem(key, value);
+      resolve(val);
+    } catch (e) {
+      reject(e);
+    }
+  });
+}
+export function getStorage(key: string, parse = false): Promise<any> {
+  return new Promise(async resolve => {
+    try {
+      const val = (await AsyncStorage.getItem(key)) as any;
+      const fix_val = !['', null, 'null'].includes(val)
+        ? parse
+          ? JSON.parse(val)
+          : val
+        : null;
+      resolve(fix_val);
+    } catch (e) {
+      console.log('e_getStorage', e.message);
+      resolve(null);
+    }
+  });
 }

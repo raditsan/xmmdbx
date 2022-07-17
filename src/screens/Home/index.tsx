@@ -90,6 +90,7 @@ export const Home = ({navigation}) => {
           {moment().format('dddd, MMMM D')}
         </Label>
         <SegmentCard1
+          offlineIdentifier={'movie_now_playing'}
           flagRefresh={flagRefresh}
           title={t('movie_now_playing')}
           apiFunction={getNowPlayingApi}
@@ -106,6 +107,7 @@ export const Home = ({navigation}) => {
         />
         <View height={24} />
         <SegmentCard
+          offlineIdentifier={'movie_top_rated'}
           title={t('movie_top_rated')}
           subtitle={t('top')}
           apiFunction={getMovieTopRatedApi}
@@ -123,6 +125,7 @@ export const Home = ({navigation}) => {
         />
         <View height={24} />
         <SegmentCard
+          offlineIdentifier={'movie_popular'}
           title={t('movie_popular')}
           subtitle={t('top')}
           apiFunction={getMoviePopularApi}
@@ -140,6 +143,7 @@ export const Home = ({navigation}) => {
         />
         <View height={24} />
         <SegmentCard
+          offlineIdentifier={'movie_upcoming'}
           title={t('movie_upcoming')}
           subtitle={t('top')}
           apiFunction={getMovieUpcomingApi}
@@ -157,6 +161,7 @@ export const Home = ({navigation}) => {
         />
         <View height={24} />
         <SegmentCard1
+          offlineIdentifier={'tv_aring_today'}
           title={t('tv_aring_today')}
           apiFunction={getTvAiringTodayApi}
           onTapItem={item => {
@@ -173,6 +178,7 @@ export const Home = ({navigation}) => {
         />
         <View height={24} />
         <SegmentCard
+          offlineIdentifier={'tv_on_the_air'}
           title={t('tv_on_the_air')}
           subtitle={t('top')}
           apiFunction={getTvOnTheAirApi}
@@ -190,6 +196,7 @@ export const Home = ({navigation}) => {
         />
         <View height={24} />
         <SegmentCard
+          offlineIdentifier={'tv_top_rated'}
           title={t('tv_top_rated')}
           subtitle={t('top')}
           apiFunction={getTvTopRatedApi}
@@ -207,6 +214,7 @@ export const Home = ({navigation}) => {
         />
         <View height={24} />
         <SegmentCard
+          offlineIdentifier={'tv_popular'}
           title={t('tv_popular')}
           subtitle={t('top')}
           apiFunction={getTvPopularApi}
@@ -224,6 +232,7 @@ export const Home = ({navigation}) => {
         />
         <View height={24} />
         <SegmentCard2
+          offlineIdentifier={'popular_person'}
           title={t('popular_person')}
           onTapItem={() => {
             // onOpenMovieItemModal(item);

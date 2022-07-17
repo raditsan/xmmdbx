@@ -5,7 +5,8 @@ import {
   FlatListProps,
   GestureResponderEvent,
   LayoutChangeEvent,
-  OpaqueColorValue, ScrollViewProps,
+  OpaqueColorValue,
+  ScrollViewProps,
   StatusBarStyle,
   StyleProp,
   TextStyle,
@@ -31,6 +32,7 @@ export interface FetchProps<P> {
   showToastWhenFailed?: boolean;
   initialParamOrDataForFetch?: any;
   saveDataWithName?: string;
+  offlineIdentifier?: string;
 }
 export type ColorName = keyof typeof Colors;
 

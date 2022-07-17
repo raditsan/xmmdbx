@@ -2,8 +2,8 @@ import {AxiosRequestHeaders, CancelToken} from 'axios';
 import config from '../configs';
 import {apiGet, fakePromise} from '../utils';
 
-const {api_url} = config.env;
-export const base_url = api_url;
+const {api_url, api_version} = config.env;
+export const base_url = api_url + api_version + '/';
 const base_movie = base_url + 'movie/';
 const base_person = base_url + 'person/';
 const base_tv = base_url + 'tv/';

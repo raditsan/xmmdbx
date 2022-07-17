@@ -11,8 +11,8 @@ import {Home, DetailList, WatchList} from 'src/screens';
 import config from 'src/configs';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {useTranslation} from 'react-i18next';
-import {Colors, Label, RNImage, View} from '../components';
-import {fakePromise, useApp} from '../utils';
+import {Colors, Label, RNImage, View} from 'src/components';
+import {fakePromise, useApp} from 'src/utils';
 
 function CustomDrawerContent(props) {
   const {t} = useTranslation();

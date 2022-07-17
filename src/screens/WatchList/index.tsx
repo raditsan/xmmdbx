@@ -1,15 +1,11 @@
 import * as React from 'react';
-import {
-  Layout,
-  EmptyPlaceholderView,
-  ListItem,
-} from 'src/components';
+import {Layout, EmptyPlaceholderView, ListItem} from 'src/components';
 import {useTranslation} from 'react-i18next';
 import {useApp} from 'src/contexts';
 import {FlatList} from 'react-native';
 import {screenWidth} from 'src/utils';
 import {useState} from 'react';
-import {MovieModel} from '../../types';
+import {MovieModel} from 'src/types';
 export const WatchList = () => {
   const {watchList} = useApp();
   const {t} = useTranslation();
@@ -41,7 +37,9 @@ export const WatchList = () => {
         keyExtractor={item => item.id}
         renderItem={props => {
           const {item} = props as {item: MovieModel; index: number};
-          return <ListItem item={item} heightItem={heightItem} />;
+          return (
+            <ListItem item={item} heightItem={heightItem} isPerson={false} />
+          );
         }}
         numColumns={2}
       />

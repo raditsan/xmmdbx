@@ -3,8 +3,14 @@ import {FetchProps, HookScrollViewProps} from 'src/types';
 import {useCallback, useEffect, useRef, useState} from 'react';
 import axios, {AxiosResponse} from 'axios';
 import {ApiGetProps} from 'src/apis';
-import {errorMessage, setRefreshControlProps, showToast} from './index';
+import {
+  errorMessage,
+  getStorage,
+  setRefreshControlProps,
+  showToast,
+} from './index';
 import {RefreshControl, ScrollViewProps} from 'react-native';
+import {useDispatch} from 'react-redux';
 export * from 'src/contexts';
 let fetchData = {};
 const getInitialFetchDataList = (props: any): any[] => {
@@ -18,6 +24,7 @@ const getInitialFetchDataList = (props: any): any[] => {
   return list;
 };
 export function useFetch<P>(props: FetchProps<P>) {
+  const dispatch = useDispatch();
   const [totalData, setTotalData] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -37,6 +44,12 @@ export function useFetch<P>(props: FetchProps<P>) {
             ...dataOrParams,
             cancelToken: source.token,
           });
+          if (props.offlineIdentifier) {
+            dispatch({
+              type: 'offline::add',
+              payload: {[props.offlineIdentifier]: responseApi},
+            });
+          }
           // @ts-ignore
           setResponse(responseApi);
           if (props.saveDataWithName) {
@@ -54,9 +67,20 @@ export function useFetch<P>(props: FetchProps<P>) {
           }
           resolve(responseApi);
         } catch (e) {
+          console.log('e nih', e.message);
           if (axios.isCancel(e)) {
             console.log('Request canceled =>', e.message);
             return;
+          }
+
+          if (e.message === 'Network Error' && props.offlineIdentifier) {
+            getStorage('offline', true)
+              .then(value => {
+                if (value) {
+                  setResponse(value[props.offlineIdentifier]);
+                }
+              })
+              .catch(() => {});
           }
           // console.log('e_getData', JSON.stringify(e.response, null, 3));
           const {config, data, status, headers} = e.response || {};
