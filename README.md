@@ -62,7 +62,7 @@ This template follows a very simple project structure:
 `yarn install`
 
 #### Using npm
-`npm install --legacy-peer-deps`
+`npm install`
 
 ### Running
 
