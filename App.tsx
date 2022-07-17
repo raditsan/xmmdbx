@@ -7,6 +7,7 @@ import config from 'src/configs';
 import GlobalFont from 'react-native-global-font';
 import {LogBox} from 'react-native';
 import {AppContextProvider} from 'src/contexts';
+import { SafeAreaProvider } from "react-native-safe-area-context";
 export const init_i18n = i18n;
 setupAxios({});
 LogBox.ignoreLogs([
@@ -19,7 +20,10 @@ const App = () => {
   return (
     <GestureHandlerRootView style={{flex: 1}}>
       <AppContextProvider>
-        <Navigators />
+        <SafeAreaProvider>
+          <Navigators />
+        </SafeAreaProvider>
+
       </AppContextProvider>
     </GestureHandlerRootView>
   );

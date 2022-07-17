@@ -2,12 +2,13 @@ import * as React from 'react';
 import {MovieModel} from 'src/types';
 import {useTranslation} from 'react-i18next';
 import {tmdbImage, useFetch} from 'src/utils';
-import {useMemo} from 'react';
+import {useEffect, useMemo} from 'react';
 import {Image, Label, RNImage, RNScrollView, View} from 'src/components';
 import {TouchableOpacity} from 'react-native';
 
 export const SegmentCard = (props: {
   title: string;
+  flagRefresh: string;
   subtitle?: string;
   apiFunction: (data: any) => Promise<any>;
   onTapItem: (data: MovieModel) => void;
@@ -16,8 +17,11 @@ export const SegmentCard = (props: {
   const {t} = useTranslation();
   const api = useFetch({
     apiFunction: props.apiFunction,
-    fetchOnMounted: true,
   });
+
+  useEffect(() => {
+    api.fetch().then(() => {});
+  }, [props.flagRefresh]);
 
   const list = useMemo(() => {
     let listHolder = [

@@ -1,17 +1,9 @@
 import * as React from 'react';
-import {
-  Colors,
-  Image,
-  Label,
-  Layout,
-  RNImage,
-  RNScrollView,
-  View,
-} from 'src/components';
-import {Dimensions, TouchableOpacity} from 'react-native';
+import {Label, Layout, RNImage, RNScrollView, View} from 'src/components';
+import {TouchableOpacity} from 'react-native';
 import {useTranslation} from 'react-i18next';
 import moment from 'moment';
-import {tmdbImage, useApp} from 'src/utils';
+import {fakePromise, randomString, useApp, useScrollView} from 'src/utils';
 import {
   getMoviePopularApi,
   getMovieTopRatedApi,
@@ -22,23 +14,31 @@ import {
   getTvPopularApi,
   getTvTopRatedApi,
 } from 'src/apis';
-import {useRef, useState} from 'react';
 import config from 'src/configs';
 import {DrawerActions} from '@react-navigation/native';
-import {Modalize} from 'react-native-modalize';
 import {
   SegmentCard1,
   SegmentCard,
   SegmentCard2,
 } from 'src/screens/Home/components';
-import {MovieModel} from 'src/types';
+import {useState} from 'react';
 
 export const Home = ({navigation}) => {
-  const {watchList, addToWatchList, removeFromWatchList} = useApp();
-  const [heightItem, setHeightItem] = useState(0);
-  const [selectedData, setSelectedData] = useState<MovieModel>(null);
-  const {onOpenMovieItemModal} = useApp()
+  const [flagRefresh, setFlagRefresh] = useState(randomString());
+  const {onOpenMovieItemModal} = useApp();
   const {t} = useTranslation();
+  const {setIsRefreshing, scrollViewProps} = useScrollView({
+    scrollViewProps: {
+      showsVerticalScrollIndicator: false,
+    },
+    onRefresh: async () => {
+      setFlagRefresh(randomString());
+      setIsRefreshing(true);
+      await fakePromise(2000);
+      setIsRefreshing(false);
+      // onRefreshing();
+    },
+  });
   return (
     <Layout
       showHeader
@@ -79,7 +79,7 @@ export const Home = ({navigation}) => {
           </TouchableOpacity>
         ),
       }}>
-      <RNScrollView style={{flex: 1}}>
+      <RNScrollView {...scrollViewProps}>
         <Label
           color={'color2'}
           size={14}
@@ -90,6 +90,7 @@ export const Home = ({navigation}) => {
           {moment().format('dddd, MMMM D')}
         </Label>
         <SegmentCard1
+          flagRefresh={flagRefresh}
           title={t('movie_now_playing')}
           apiFunction={getNowPlayingApi}
           onTapItem={item => {
@@ -118,6 +119,7 @@ export const Home = ({navigation}) => {
               },
             });
           }}
+          flagRefresh={flagRefresh}
         />
         <View height={24} />
         <SegmentCard
@@ -134,6 +136,7 @@ export const Home = ({navigation}) => {
               },
             });
           }}
+          flagRefresh={flagRefresh}
         />
         <View height={24} />
         <SegmentCard
@@ -150,6 +153,7 @@ export const Home = ({navigation}) => {
               },
             });
           }}
+          flagRefresh={flagRefresh}
         />
         <View height={24} />
         <SegmentCard1
@@ -165,6 +169,7 @@ export const Home = ({navigation}) => {
               },
             });
           }}
+          flagRefresh={flagRefresh}
         />
         <View height={24} />
         <SegmentCard
@@ -181,6 +186,7 @@ export const Home = ({navigation}) => {
               },
             });
           }}
+          flagRefresh={flagRefresh}
         />
         <View height={24} />
         <SegmentCard
@@ -197,6 +203,7 @@ export const Home = ({navigation}) => {
               },
             });
           }}
+          flagRefresh={flagRefresh}
         />
         <View height={24} />
         <SegmentCard
@@ -213,6 +220,7 @@ export const Home = ({navigation}) => {
               },
             });
           }}
+          flagRefresh={flagRefresh}
         />
         <View height={24} />
         <SegmentCard2
@@ -227,6 +235,7 @@ export const Home = ({navigation}) => {
               },
             });
           }}
+          flagRefresh={flagRefresh}
         />
       </RNScrollView>
     </Layout>

@@ -5,7 +5,7 @@ import {
   FlatListProps,
   GestureResponderEvent,
   LayoutChangeEvent,
-  OpaqueColorValue,
+  OpaqueColorValue, ScrollViewProps,
   StatusBarStyle,
   StyleProp,
   TextStyle,
@@ -165,4 +165,8 @@ export interface MovieModel {
   video: boolean;
   vote_average: number;
   vote_count: number;
+}
+export interface HookScrollViewProps {
+  onRefresh?: () => void;
+  scrollViewProps?: ScrollViewProps;
 }

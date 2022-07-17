@@ -116,3 +116,17 @@ export const setRefreshControlProps = (props: RefreshControlProps) => {
     onRefresh: props.onRefresh,
   };
 };
+export function randomString(length: number = 8): string {
+  const letters = 'abcdefghijklmnopqrstuvwxyz';
+  const numbers = '';
+  const charset = `${letters}${letters.toUpperCase()}${numbers}`;
+
+  const randomCharacter = (character: string) =>
+    character[Math.floor(Math.random() * character.length)];
+
+  let R = '';
+  for (let i = 0; i < length; i++) {
+    R += randomCharacter(charset);
+  }
+  return R;
+}

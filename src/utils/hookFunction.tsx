@@ -1,8 +1,10 @@
-import {FetchProps} from 'src/types';
+import * as React from 'react';
+import {FetchProps, HookScrollViewProps} from 'src/types';
 import {useCallback, useEffect, useRef, useState} from 'react';
 import axios, {AxiosResponse} from 'axios';
 import {ApiGetProps} from 'src/apis';
-import {errorMessage, showToast} from './index';
+import {errorMessage, setRefreshControlProps, showToast} from './index';
+import {RefreshControl, ScrollViewProps} from 'react-native';
 export * from 'src/contexts';
 let fetchData = {};
 const getInitialFetchDataList = (props: any): any[] => {
@@ -160,3 +162,33 @@ export function useIsMounted() {
   }, []);
   return isMounted;
 }
+export const useScrollView = ({
+  onRefresh,
+  scrollViewProps,
+}: HookScrollViewProps) => {
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [refreshingIdentifier, setRefreshingIdentifier] = useState('');
+
+  const spRefreshing: ScrollViewProps = {
+    style: {flex: 1},
+    refreshControl: (
+      <RefreshControl
+        {...setRefreshControlProps({
+          refreshing: isRefreshing,
+          onRefresh,
+        })}
+      />
+    ),
+  };
+  const fixScrollViewProps = {
+    ...spRefreshing,
+    scrollViewProps,
+  };
+  return {
+    scrollViewProps: fixScrollViewProps,
+    isRefreshing,
+    setIsRefreshing,
+    refreshingIdentifier,
+    setRefreshingIdentifier,
+  };
+};

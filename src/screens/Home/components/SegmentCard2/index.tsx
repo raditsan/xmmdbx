@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {MovieModel} from 'src/types';
 import {useTranslation} from 'react-i18next';
-import {useState} from 'react';
+import { useEffect, useState } from "react";
 import {limitArrayTo, screenWidth, tmdbImage, useFetch} from 'src/utils';
 import {getPersonPopularApi} from 'src/apis';
 import {Image, Label, View} from 'src/components';
@@ -9,6 +9,7 @@ import {FlatList, TouchableOpacity} from 'react-native';
 
 export const SegmentCard2 = (props: {
   title: string;
+  flagRefresh: string;
   onTapItem: (data: MovieModel) => void;
   onTapViewMore?: () => void;
 }) => {
@@ -16,8 +17,11 @@ export const SegmentCard2 = (props: {
   const [heightItem, setHeightItem] = useState(screenWidth() / 1.8);
   const api = useFetch({
     apiFunction: getPersonPopularApi,
-    fetchOnMounted: true,
   });
+
+  useEffect(() => {
+    api.fetch().then(() => {});
+  }, [props.flagRefresh]);
   return (
     <>
       <View marginHorizontal={24} marginBottom={12}>
