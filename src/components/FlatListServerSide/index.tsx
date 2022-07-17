@@ -89,8 +89,7 @@ export const FlatListServerSide = forwardRef(
         return;
       }
       setIsRefreshing(true);
-      getData(1, pageSize, true);
-      console.log('masuk sini');
+      getData(1, pageSize, true).then(() => {}).catch(() => {});
     };
 
     const checkIsFetching = () => {
@@ -173,7 +172,6 @@ export const FlatListServerSide = forwardRef(
     }, [dataRequest]);
 
     useEffect(() => {
-      console.log('masuk sini');
       if (isMounted.current && flagRefresh) {
         onRefresh();
       }
