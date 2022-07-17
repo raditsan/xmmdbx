@@ -1,4 +1,4 @@
-# React Native Movie DB
+# React Native XMMDBX
 
 ## Screenshots
 
