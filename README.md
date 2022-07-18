@@ -33,6 +33,7 @@
 - [react-i18next](https://react.i18next.com/) for string localization.
 - [redux](https://redux.js.org/) for state management.
 - [moment](https://redux.js.org/) for date formating.
+- [react-native-toast-message](https://github.com/calintamas/react-native-toast-message) for toast messaging.
 - [jest](https://facebook.github.io/jest/) and [react-native-testing-library](https://callstack.github.io/react-native-testing-library/) for testing.
 
 ## Folder structure
@@ -47,6 +48,15 @@ This template follows a very simple project structure:
     - `contexts`: Contexts to store any context react.
     - `i18n`: Folder to store the languages files.
     - `navigators`: Folder to store the navigators.
+    - `redux`: Folder to store redux.
+        - `actions`: Folder to store all action when using redux
+          - `NameAction`: Folder action
+            - `file_action.ts`: File name Action
+        - `reducers`: Folder to store all reducer when using redux
+          - `NameReducer`: Folder reducer
+            - `file_reducer.ts`: File name reducer
+        - `types`: Folder to store all type when using redux in action or reducer
+        - `store`: Folder to store all store redux
     - `screens`: Folder that contains all application screens/features.
         - `Screen`: Each screen should be stored inside its folder and inside it a file for its code and a separate one for the styles and tests.
             - `components`

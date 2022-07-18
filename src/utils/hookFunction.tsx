@@ -11,6 +11,7 @@ import {
 } from './index';
 import {RefreshControl, ScrollViewProps} from 'react-native';
 import {useDispatch} from 'react-redux';
+import {OfflineAction} from 'src/redux/actions';
 export * from 'src/contexts';
 let fetchData = {};
 const getInitialFetchDataList = (props: any): any[] => {
@@ -45,10 +46,7 @@ export function useFetch<P>(props: FetchProps<P>) {
             cancelToken: source.token,
           });
           if (props.offlineIdentifier) {
-            dispatch({
-              type: 'offline::add',
-              payload: {[props.offlineIdentifier]: responseApi},
-            });
+            dispatch(OfflineAction({[props.offlineIdentifier]: responseApi}));
           }
           // @ts-ignore
           setResponse(responseApi);

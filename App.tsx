@@ -6,10 +6,12 @@ import {setStorage, setupAxios} from 'src/utils';
 import config from 'src/configs';
 import GlobalFont from 'react-native-global-font';
 import {LogBox} from 'react-native';
+import {Label, RNImage, View} from 'src/components';
 import {AppContextProvider} from 'src/contexts';
 import {Provider as ProviderRedux} from 'react-redux';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {legacy_createStore as createStore} from 'redux';
+import {store} from 'src/redux/stores';
+import Toast from 'react-native-toast-message';
 export const init_i18n = i18n;
 setupAxios({});
 LogBox.ignoreLogs([
@@ -17,35 +19,49 @@ LogBox.ignoreLogs([
   'Require cycle',
   'VirtualizedLists should never be nested inside plain ScrollViews with the same orientation',
 ]);
+
+const toastConfig = {
+  success: ({text1, text2, props}) => (
+    <View padding={20} style={{width: '100%'}}>
+      <View
+        padding={15}
+        borderRadius={8}
+        backgroundColor={'color3'}
+        borderColor={'color1'}
+        borderWidth={1}
+        flexDirection={'row'}
+        alignItems={'center'}>
+        <RNImage
+          source={require('src/assets/images/checkmark_circle_fill.png')}
+          style={{width: 16, height: 16}}
+        />
+        <Label marginLeft={4} color={'color1'} numberOfLines={2}>
+          {text1 || 'Success'}
+        </Label>
+      </View>
+    </View>
+  ),
+  error: ({text1, text2, props}) => (
+    <View padding={20} style={{width: '100%'}}>
+      <View
+        padding={15}
+        borderRadius={8}
+        backgroundColor={'color5'}
+        flexDirection={'row'}
+        alignItems={'center'}>
+        <RNImage
+          source={require('src/assets/images/xmark_circle_fill.png')}
+          style={{width: 16, height: 16}}
+        />
+        <Label marginLeft={4} color={'color1'} numberOfLines={2}>
+          {text1 || 'Failed'}
+        </Label>
+      </View>
+    </View>
+  ),
+};
 const App = () => {
   GlobalFont.applyGlobal(config.fontFamily);
-  function offlineReducer(state = {offline: {}}, action) {
-    switch (action.type) {
-      case 'offline::add':
-        return {
-          offline: {
-            ...state.offline,
-            ...action.payload,
-          },
-        };
-      default:
-        return state;
-    }
-  }
-
-  // function offlineReducer(state = {value: 0}, action) {
-  //   switch (action.type) {
-  //     case 'counter/incremented':
-  //       return {value: state.value + 1};
-  //     case 'counter/decremented':
-  //       return {value: state.value - 1};
-  //     default:
-  //       return state;
-  //   }
-  // }
-
-  // @ts-ignore
-  const store = createStore(offlineReducer);
 
   store.subscribe(() => {
     if (Object.keys(store.getState()).includes('offline')) {
@@ -60,6 +76,8 @@ const App = () => {
         <ProviderRedux store={store}>
           <SafeAreaProvider>
             <Navigators />
+            {/*@ts-ignore*/}
+            <Toast config={toastConfig} />
           </SafeAreaProvider>
         </ProviderRedux>
       </AppContextProvider>

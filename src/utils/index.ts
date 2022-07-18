@@ -5,9 +5,10 @@ import {
   useHeaderHeight,
 } from '@react-navigation/elements';
 import axios, {AxiosRequestConfig, AxiosResponse} from 'axios';
-import config from '../configs';
+import config from 'src/configs';
 import {Dimensions, RefreshControlProps} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Toast, {ToastShowParams} from 'react-native-toast-message';
 export * from './hookFunction';
 export {useSafeAreaInsets, useHeaderHeight, getDefaultHeaderHeight};
 export const colorsFix: any = name => {
@@ -50,8 +51,18 @@ export function errorMessage(e: any) {
   return typeof message === 'string' ? message : defaultMsg;
 }
 export const showToast = {
-  success: (params?: any) => {},
-  error: (params?: any) => {},
+  success: (params?: ToastShowParams) => {
+    Toast.show({
+      type: 'success',
+      ...params,
+    });
+  },
+  error: (params?: ToastShowParams) => {
+    Toast.show({
+      type: 'error',
+      ...params,
+    });
+  },
 };
 export function deleteNegativeValueInObject(value: object): object {
   const p = {
